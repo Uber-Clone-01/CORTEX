@@ -15,15 +15,15 @@ const Features = () => {
   return (
     <div className="w-full min-h-screen bg-zinc-900 text-white pt-24"> 
     <Navbar/>
-      <div className="max-w-6xl mx-auto p-8">
+      <div className="max-w-6xl mx-auto p-8 shadow-md transition-transform duration-300 hover:scale-110">
         <h1 className="text-4xl font-bold text-center text-neonBlue mb-8">
           Features of CortexAI
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
           {/* Feature 1 */}
           <div
-            className="bg-gray-800 p-6 rounded-lg shadow-md"
+            className="bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-110"
             data-aos="fade-up"
           >
             <h2 className="text-2xl font-semibold text-neonBlue mb-4">
@@ -36,7 +36,7 @@ const Features = () => {
 
           {/* Feature 2 */}
           <div
-            className="bg-gray-800 p-6 rounded-lg shadow-md"
+            className="bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-110"
             data-aos="fade-up"
             data-aos-delay="200"
           >
@@ -50,7 +50,7 @@ const Features = () => {
 
           {/* Feature 3 */}
           <div
-            className="bg-gray-800 p-6 rounded-lg shadow-md"
+            className="bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-110"
             data-aos="fade-up"
             data-aos-delay="400"
           >
@@ -67,7 +67,7 @@ const Features = () => {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Feature 4 */}
           <div
-            className="bg-gray-800 p-6 rounded-lg shadow-md"
+            className="bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-110"
             data-aos="fade-up"
           >
             <h2 className="text-2xl font-semibold text-neonBlue mb-4">
@@ -80,7 +80,7 @@ const Features = () => {
 
           {/* Feature 5 */}
           <div
-            className="bg-gray-800 p-6 rounded-lg shadow-md"
+            className="bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-110"
             data-aos="fade-up"
             data-aos-delay="200"
           >
@@ -94,7 +94,7 @@ const Features = () => {
 
           {/* Feature 6 */}
           <div
-            className="bg-gray-800 p-6 rounded-lg shadow-md"
+            className="bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-110"
             data-aos="fade-up"
             data-aos-delay="400"
           >

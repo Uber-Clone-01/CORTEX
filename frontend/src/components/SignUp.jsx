@@ -57,101 +57,101 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Navbar/>
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-neonBlue">Sign Up</h2>
+    <div className="flex items-center justify-center min-h-screen bg-black text-gray-200">
+      <Navbar />
+      <div className="w-full max-w-md p-6 bg-gray-800 rounded-lg shadow-lg shadow-md transition-transform duration-300 hover:scale-110">
+        <h2 className="text-2xl font-bold text-center text-blue-400">Create Account</h2>
         <form className="mt-6" onSubmit={submitHandler}>
           {/* Name Field */}
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-400">
               Full Name
             </label>
             <input
               type="text"
               id="name"
               name="name"
-              className="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:ring-neonBlue focus:border-neonBlue"
+              className="w-full px-4 py-2 mt-1 bg-gray-700 border border-gray-600 rounded-md text-gray-200 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your full name"
               value={formData.name}
               onChange={handleChange}
               required
             />
           </div>
-
+  
           {/* Email Field */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-400">
               Email Address
             </label>
             <input
               type="email"
               id="email"
               name="email"
-              className="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:ring-neonBlue focus:border-neonBlue"
+              className="w-full px-4 py-2 mt-1 bg-gray-700 border border-gray-600 rounded-md text-gray-200 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
               required
             />
           </div>
-
+  
           {/* Password Field */}
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-400">
               Password
             </label>
             <input
               type="password"
               id="password"
               name="password"
-              className="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:ring-neonBlue focus:border-neonBlue"
+              className="w-full px-4 py-2 mt-1 bg-gray-700 border border-gray-600 rounded-md text-gray-200 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Create a password"
               value={formData.password}
               onChange={handleChange}
               required
             />
           </div>
-
+  
           {/* Confirm Password Field */}
           <div className="mb-4">
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-400">
               Confirm Password
             </label>
             <input
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              className="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:ring-neonBlue focus:border-neonBlue"
+              className="w-full px-4 py-2 mt-1 bg-gray-700 border border-gray-600 rounded-md text-gray-200 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Confirm your password"
               value={formData.confirmPassword}
               onChange={handleChange}
               required
             />
           </div>
-
+  
           {/* Error Message */}
           {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
-
+  
           {/* Success Message */}
           {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
-
+  
           {/* Submit Button */}
           <div className="mt-6">
             <button
               type="submit"
-              className="w-full bg-neonBlue text-white px-6 py-3 rounded-md font-bold transition transform duration-300 hover:bg-lightBlue hover:scale-105 shadow-lg"
+              className="w-full px-6 py-3 text-white bg-blue-500 rounded-md font-bold transition transform duration-300 hover:bg-blue-600 hover:scale-105 shadow-lg"
             >
               Sign Up
             </button>
           </div>
         </form>
-
+  
         {/* Additional Links */}
         <div className="mt-4 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-400">
             Already have an account?{" "}
-            <Link to="/login" className="text-neonBlue hover:underline">
+            <Link to="/login" className="text-blue-400 hover:underline">
               Login
             </Link>
           </p>
@@ -159,6 +159,7 @@ const Signup = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Signup;

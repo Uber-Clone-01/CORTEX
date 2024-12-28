@@ -38,6 +38,7 @@ const Home = () => {
   <Navbar/>
   <div className="relative z-10 bg-black/50 min-h-screen">
   
+  
     {/* Hero Section */}
     <section className="flex flex-col items-center justify-center text-center h-[80vh] relative">
     <motion.p
@@ -46,7 +47,12 @@ const Home = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, delay: 0.8 }}
       >
-        Meet Cortex!!
+        
+        <img
+          src="/assets/CortexAILogo.png" // Replace with your logo's path
+          alt="Logo"
+          className="w-20 h-20 shadow-md transition-transform duration-300 hover:scale-110"
+        />
       </motion.p>
       <motion.h1
         className="text-5xl md:text-7xl text-neonWhite mt-6"

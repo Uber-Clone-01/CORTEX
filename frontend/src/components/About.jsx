@@ -48,7 +48,7 @@ const About = () => {
 
           {/* Sanchay Kumar */}
           <div
-            className="bg-gray-800 p-6 rounded-lg shadow-md"
+            className="bg-gray-800 p-6 rounded-lg "
             data-aos="fade-left"
             data-aos-delay="200"
           >
