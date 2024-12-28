@@ -1,15 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState,useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from '../config/axios';
 import Navbar from "./navbar";
+import {UserContext} from '../context/user.context'
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const {setUser} = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setErrorMessage(''); // Clear previous error messages
+    axios.post('/users/login', {
+      email,
+      password
+    })
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem('token', res.data.token);
+        setUser(res.data.user);
+        navigate('/homescreen');
+      })
+      .catch((err) => {
+        console.error(err.response?.data || "Error occurred");
+        setErrorMessage(err.response?.data?.message || "Login failed. Please try again.");
+      });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-gray-200">
       <Navbar />
       {/* Logo */}
       <div className="mb-8">
         <img
-          src="/assets/CortexAILogo.png" // Replace with your logo's path
+          src="/assets/CortexAILogo.png" // Ensure this path is correct
           alt="Logo"
           className="w-16 h-16 shadow-md transition-transform duration-300 hover:scale-110"
         />
@@ -21,7 +48,7 @@ const Login = () => {
           Sign in to Your Account
         </h2>
 
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={submitHandler}>
           {/* Email Field */}
           <div className="mb-4">
             <label
@@ -31,6 +58,7 @@ const Login = () => {
               Email Address
             </label>
             <input
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               id="email"
               name="email"
@@ -49,6 +77,7 @@ const Login = () => {
               Password
             </label>
             <input
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               id="password"
               name="password"
@@ -57,6 +86,9 @@ const Login = () => {
               required
             />
           </div>
+
+          {/* Error Message */}
+          {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
 
           {/* Submit Button */}
           <div className="mt-6">
@@ -82,8 +114,6 @@ const Login = () => {
           </p>
         </div>
       </div>
-
-      
     </div>
   );
 };

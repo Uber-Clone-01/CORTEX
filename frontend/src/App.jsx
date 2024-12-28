@@ -1,9 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import 'aos/dist/aos.css'; // Import AOS styles
+import 'aos/dist/aos.css'; 
 
 import Home from './components/Home';
-
 
 import LocomotiveScroll from 'locomotive-scroll';
 import Login from './components/Login';
@@ -14,7 +13,7 @@ import About from './components/About';
 import HomeScreen from './components/HomeScreen';
 import Project from './components/Project';
 
-// Import UserProvider
+
 import { UserProvider } from './context/user.context'; 
 
 function App() {
@@ -22,6 +21,7 @@ function App() {
 
   return (
     <UserProvider> {/* Wrap your routes with UserProvider */}
+     
       <div className='w-full min-h-screen bg-zinc-900 text-white'>
         
         <Routes>
@@ -32,6 +32,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/about' element={<About />} />
           <Route path='/homescreen' element={<HomeScreen />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/project' element={<Project />} />
         </Routes>
        

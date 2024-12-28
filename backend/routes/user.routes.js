@@ -6,6 +6,8 @@ const router = Router();
 
 router.post('/register',
     body('email').isEmail().withMessage('Email must be a valid email address'),
+    body('name').isLength({min: 1}).withMessage
+    ('name must be at least 1 characters long'),
     body('password').isLength({ min: 8 }).withMessage('Password must be 8 characters long'),
     userController.createUserController);
 
@@ -19,6 +21,6 @@ router.post('/login',
 router.get('/profile',authMiddleware.authUser,userController.profileController);
 
 router.get('/logout',authMiddleware.authUser,userController.logoutController);
-
+router.get('/all', authMiddleware.authUser, userController.getAllUsersController);
 export default router;
 

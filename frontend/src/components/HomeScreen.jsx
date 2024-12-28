@@ -1,31 +1,44 @@
-import React, { useState } from "react";
+import React, { useState , useContext,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "../config/axios";
+import { UserContext } from "../context/user.context";
 import { motion } from "framer-motion";
 import Navbar from "./navbar";
 const HomeScreen = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [projectName, setProjectName] = useState("");
-  const [projects, setProjects] = useState([
-    { _id: "1", name: "Sample Project 1", users: [] },
-    { _id: "2", name: "Sample Project 2", users: [] },
-  ]);
-
+  const { user } = useContext(UserContext)
+  const [ isModalOpen, setIsModalOpen ] = useState(false)
+  const [ projectName, setProjectName ] = useState(null)
+  const [projects, setProjects] = useState([]);
+  
   const navigate = useNavigate();
-
   // Create a new project and update local state
-  const createProject = (e) => {
+  function createProject (e) {
     e.preventDefault();
+    console.log({projectName});
+    axios.post('/project/create', {name : projectName}).then((res)=>{
+      console.log(res)
+      setIsModalOpen(false);
+    }).catch((error)=>{console.log(error)})
     // Add the new project to the list
+    /*
     const newProject = { _id: Date.now().toString(), name: projectName, users: [] };
     setProjects([...projects, newProject]);
     setIsModalOpen(false);
-    setProjectName("");
+    setProjectName("");*/
   };
 
-  // Handle logout functionality
+  useEffect(() => {
+    axios.get('/project/all').then((res) => {
+      setProjects(res.data.projects);
+
+    }).catch(err => {
+        console.log(err)
+    })
+
+}, [])
   const handleLogout = () => {
     // Clear user session or any authentication logic you have
-    localStorage.removeItem("user"); // Assuming the user is stored in local storage
+    localStorage.removeItem('token'); // Assuming the user is stored in local storage
     navigate("/login"); // Redirect to login page
   };
 
@@ -49,7 +62,7 @@ const HomeScreen = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        Welcome Back, User!
+        Welcome Back, {user.name}!
       </motion.h1>
 
       {/* Projects Section */}
