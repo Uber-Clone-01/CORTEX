@@ -4,6 +4,8 @@ import axios from "../config/axios";
 import { UserContext } from "../context/user.context";
 import { motion } from "framer-motion";
 import Navbar from "./navbar";
+import { RiDeleteBinLine } from "react-icons/ri";
+
 const HomeScreen = () => {
   const { user } = useContext(UserContext)
   const [ isModalOpen, setIsModalOpen ] = useState(false)
@@ -44,6 +46,23 @@ const HomeScreen = () => {
     navigate("/login"); // Redirect to login page
   };
 
+  
+  {/*Deletetion API*/}
+  const handleDeleteProject = async (projectId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this project?");
+    if (!confirmDelete) return;
+  
+    try {
+      await deleteProjectById(projectId); 
+      setProjects((prev) => prev.filter((project) => project._id !== projectId));
+      alert("Project deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      alert("Failed to delete the project.");
+    }
+  };
+  
+
   return (
     <>
      <Navbar />
@@ -53,7 +72,7 @@ const HomeScreen = () => {
       <div className="text-right mb-4">
         <button
           onClick={handleLogout}
-          className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-red-700 transition"
         >
           Logout
         </button>
@@ -72,8 +91,8 @@ const HomeScreen = () => {
       {/* Projects Section */}
       <motion.div
         className="projects grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0,y: -50 }}
+        animate={{ opacity: 1, y: 0  }}
         transition={{ delay: 0.5, duration: 1 }}
       >
         {/* New Project Button */}
@@ -87,27 +106,39 @@ const HomeScreen = () => {
 
         {/* Existing Projects */}
         {projects.map((project) => (
-          <motion.div
-            key={project._id}
-            onClick={() =>
-              navigate(`/project`, {
-                state: { project },
-              })
-            }
-            className="project bg-gray-800 p-6 border border-slate-600 rounded-lg cursor-pointer hover:bg-gray-700 hover:scale-105 transition-transform"
-            whileHover={{ scale: 1.05 }}
-          >
-            <h2 className="font-semibold text-neonWhite text-lg mb-2">
-              {project.name}
-            </h2>
-            <div className="text-sm text-gray-400">
-              <p>
-                <i className="ri-user-line mr-2"></i>
-                Collaborators: {project.users.length}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+  <motion.div
+    key={project._id}
+    className="project bg-gray-800 p-6 border border-slate-600 rounded-lg cursor-pointer hover:bg-gray-700 hover:scale-105 transition-transform relative"
+    whileHover={{ scale: 1.05 }}
+  >
+    {/* Delete Icon */}
+    <motion.button
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent navigation when delete is clicked
+        handleDeleteProject(project._id);
+      }}
+      className="absolute top-2 right-2 text-gray-400 hover:text-blue-500 transition"
+      whileHover={{ scale: 1.2 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <RiDeleteBinLine size={20} />
+    </motion.button>
+
+    {/* Project Details */}
+    <div onClick={() => navigate(`/project`, { state: { project } })}>
+      <h2 className="font-semibold text-neonWhite text-lg mb-2">{project.name}</h2>
+      <div className="text-sm text-gray-400">
+        <p>
+          <i className="ri-user-line mr-2"></i>
+          Collaborators: {project.users.length}
+        </p>
+      </div>
+    </div>
+  </motion.div>
+))}
+
+
+
       </motion.div>
 
       {/* Modal for Creating a New Project */}

@@ -62,11 +62,11 @@ const Project = () => {
             <section className="left relative flex flex-col h-full md:h-screen min-w-full md:min-w-96 bg-gray-800 text-white">
                 <header className="flex justify-between items-center p-2 px-4 w-full bg-gray-900">
                     {/* Home Button */}
-                    <Link to="/homeScreen" className="text-blue-500">
+                    <Link to="/homescreen" className="text-white-500">
                         <RiHomeFill size={20} />
                     </Link>
 
-                    <button className="flex gap-2 text-blue-500" onClick={() => setIsModalOpen(true)}>
+                    <button className="flex gap-2 text-white" onClick={() => setIsModalOpen(true)}>
                         <RiAddFill className="mr-1" />
                         <p>Add collaborator</p>
                     </button>
