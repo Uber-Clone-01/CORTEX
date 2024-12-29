@@ -25,6 +25,8 @@ const HomeScreen = () => {
     setProjects([...projects, newProject]);
     setIsModalOpen(false);
     setProjectName("");*/
+    const newProject = { _id: Date.now().toString(), name: projectName, users: [] };
+  setProjects((prevProjects) => [...prevProjects, newProject]);
   };
 
   useEffect(() => {
@@ -43,8 +45,10 @@ const HomeScreen = () => {
   };
 
   return (
-    <main className="p-8 bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen pt-24">
-        <Navbar/>
+    <>
+     <Navbar />
+    <main className="p-8 bg-gradient-to-b from-gray-900 to-gray-800   min-h-screen pt-24">
+       
       {/* Logout Button */}
       <div className="text-right mb-4">
         <button
@@ -132,30 +136,32 @@ const HomeScreen = () => {
                   onChange={(e) => setProjectName(e.target.value)}
                   value={projectName}
                   type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  className="mt-1 block w-full p-2 border border-gray-700 text-black rounded-md"
                   required
                 />
               </div>
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  className="mr-2 px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition"
-                  onClick={() => setIsModalOpen(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
-                >
-                  Create
-                </button>
-              </div>
+              <div className="flex flex-col sm:flex-row justify-end gap-2">
+  <button
+    type="button"
+    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition"
+    onClick={() => setIsModalOpen(false)}
+  >
+    Cancel
+  </button>
+  <button
+    type="submit"
+    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+  >
+    Create
+  </button>
+</div>
+
             </form>
           </motion.div>
         </motion.div>
       )}
     </main>
+    </>
   );
 };
 

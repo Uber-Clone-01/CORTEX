@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { RiAddFill, RiGroupFill, RiCloseFill, RiSendPlaneFill, RiUserFill } from 'react-icons/ri';
+import { RiAddFill, RiGroupFill, RiCloseFill, RiSendPlaneFill, RiUserFill, RiHomeFill } from 'react-icons/ri';
+import { useNavigate, Link } from "react-router-dom"; // Import Link from react-router-dom
+import { motion } from "framer-motion";
+import { gsap } from "gsap";
 
 const Project = () => {
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState(new Set());
-    const [messages, setMessages] = useState([]); // State for messages
-    const [messageInput, setMessageInput] = useState(''); // Input state for message
+    const [messages, setMessages] = useState([]);
+    const [messageInput, setMessageInput] = useState('');
+    const navigate = useNavigate();
+    const sidePanelRef = useRef();
 
     const staticUsers = [
         { email: "user1@example.com" },
@@ -21,12 +26,18 @@ const Project = () => {
 
     const messageBox = useRef();
 
-    // Initialize staticMessages state
     useEffect(() => {
         setMessages(staticMessages);
     }, []);
 
-    // Handle sending a new message
+    useEffect(() => {
+        if (isSidePanelOpen) {
+            gsap.to(sidePanelRef.current, { x: 0, duration: 0.5, ease: "power2.out" });
+        } else {
+            gsap.to(sidePanelRef.current, { x: "-100%", duration: 0.5, ease: "power2.in" });
+        }
+    }, [isSidePanelOpen]);
+
     const handleSendMessage = () => {
         if (messageInput.trim()) {
             setMessages([...messages, { sender: 'user', message: messageInput }]);
@@ -34,7 +45,6 @@ const Project = () => {
         }
     };
 
-    // Handle user click to select/unselect
     const handleUserClick = (id) => {
         setSelectedUserId((prevSelectedUserId) => {
             const newSelectedUserId = new Set(prevSelectedUserId);
@@ -51,6 +61,11 @@ const Project = () => {
         <main className="h-screen w-screen flex flex-col md:flex-row bg-gray-100">
             <section className="left relative flex flex-col h-full md:h-screen min-w-full md:min-w-96 bg-gray-800 text-white">
                 <header className="flex justify-between items-center p-2 px-4 w-full bg-gray-900">
+                    {/* Home Button */}
+                    <Link to="/homeScreen" className="text-blue-500">
+                        <RiHomeFill size={20} />
+                    </Link>
+
                     <button className="flex gap-2 text-blue-500" onClick={() => setIsModalOpen(true)}>
                         <RiAddFill className="mr-1" />
                         <p>Add collaborator</p>
@@ -65,8 +80,11 @@ const Project = () => {
                         className="message-box p-1 flex-grow flex flex-col gap-1 overflow-auto max-h-full"
                     >
                         {messages.map((msg, index) => (
-                            <div
+                            <motion.div
                                 key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3, delay: index * 0.1 }}
                                 className={`${
                                     msg.sender === 'ai' ? 'self-start' : 'self-end'
                                 } message flex flex-col p-2 bg-gray-700 w-fit rounded-md`}
@@ -75,7 +93,7 @@ const Project = () => {
                                 <div className="text-sm">
                                     <p>{msg.message}</p>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
@@ -92,9 +110,8 @@ const Project = () => {
                     </button>
                 </div>
                 <div
-                    className={`sidePanel w-full h-full flex flex-col gap-2 bg-gray-700 absolute transition-all ${
-                        isSidePanelOpen ? 'translate-x-0' : '-translate-x-full'
-                    } top-0`}
+                    ref={sidePanelRef}
+                    className="sidePanel w-full h-full flex flex-col gap-2 bg-gray-700 absolute transition-all"
                 >
                     <header className="flex justify-between items-center px-4 p-2 bg-gray-900">
                         <h1 className="font-semibold text-lg text-white">Collaborators</h1>
@@ -123,8 +140,18 @@ const Project = () => {
             </section>
 
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-white p-4 rounded-md w-96 max-w-full relative">
+                <motion.div
+                    className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                >
+                    <motion.div
+                        className="bg-white p-4 rounded-md w-96 max-w-full relative"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 200 }}
+                    >
                         <header className="flex justify-between items-center mb-4">
                             <h2 className="text-xl font-semibold">Select User</h2>
                             <button onClick={() => setIsModalOpen(false)} className="p-2">
@@ -156,20 +183,16 @@ const Project = () => {
                         >
                             Add Collaborators
                         </button>
-                        <button
-                            onClick={() => setIsModalOpen(false)}
-                            className="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-900"
-                        >
-                            <RiCloseFill />
-                        </button>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             )}
         </main>
     );
 };
 
 export default Project;
+
+
 
 
 
