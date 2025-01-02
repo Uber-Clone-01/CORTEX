@@ -12,9 +12,10 @@ import Contact from './components/Contact';
 import About from './components/About';
 import HomeScreen from './components/HomeScreen';
 import Project from './components/Project';
-
+import Whiteboard from './components/Whiteboard';
 
 import { UserProvider } from './context/user.context'; 
+
 
 function App() {
   const locomotiveScroll = new LocomotiveScroll();
@@ -34,6 +35,7 @@ function App() {
           <Route path='/homescreen' element={<HomeScreen />} />
           <Route path='/home' element={<Home />} />
           <Route path='/project' element={<Project />} />
+          <Route path='/whiteboard' element={<Whiteboard/>}/>
         </Routes>
        
       </div>

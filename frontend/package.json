@@ -10,6 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@editorjs/code": "^2.9.3",
+    "@editorjs/editorjs": "^2.30.7",
+    "@editorjs/header": "^2.8.8",
+    "@editorjs/image": "^2.10.1",
+    "@editorjs/list": "^2.0.2",
+    "@editorjs/quote": "^2.7.6",
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+    "@excalidraw/excalidraw": "^0.17.6",
     "@webcontainer/api": "^1.5.1-internal.5",
     "aos": "^2.3.4",
     "axios": "^1.7.9",
@@ -18,6 +27,7 @@
     "highlight.js": "^11.11.1",
     "locomotive-scroll": "^4.1.4",
     "markdown-to-jsx": "^7.7.2",
+    "process": "^0.11.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",

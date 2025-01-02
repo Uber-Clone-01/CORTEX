@@ -65,8 +65,8 @@ const HomeScreen = () => {
 
   return (
     <>
-     <Navbar />
-    <main className="p-8 bg-gradient-to-b from-gray-900 to-gray-800   min-h-screen pt-24">
+     
+    <main className="p-8 bg-gradient-to-b from-gray-900 to-gray-800   min-h-screen pt-18">
        
       {/* Logout Button */}
       <div className="text-right mb-4">

@@ -3,7 +3,7 @@ import { RiAddFill, RiGroupFill, RiCloseFill, RiSendPlaneFill, RiUserFill, RiHom
 import { useNavigate, Link } from "react-router-dom"; // Import Link from react-router-dom
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
-
+import { FaPencilAlt } from "react-icons/fa";
 const Project = () => {
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,11 +58,11 @@ const Project = () => {
     };
 
     return (
-        <main className="h-screen w-screen flex flex-col md:flex-row bg-gray-100">
+        <main className="h-screen w-screen flex flex-col md:flex-row bg-gray-100 ">
             <section className="left relative flex flex-col h-full md:h-screen min-w-full md:min-w-96 bg-gray-800 text-white">
                 <header className="flex justify-between items-center p-2 px-4 w-full bg-gray-900">
                     {/* Home Button */}
-                    <Link to="/homescreen" className="text-white-500">
+                   <Link to="/homescreen" className="text-white-500">
                         <RiHomeFill size={20} />
                     </Link>
 
@@ -133,11 +133,25 @@ const Project = () => {
             </section>
 
             <section className="right flex-grow h-full flex bg-gray-200">
-                <div className="code-editor flex flex-col flex-grow h-full justify-center items-center">
-                    <h2 className="text-xl font-bold text-gray-700">Welcome to the Project</h2>
-                    <p className="text-gray-600">Select a file or add collaborators to get started.</p>
-                </div>
-            </section>
+    <div className="code-editor flex flex-col flex-grow h-full">
+        {/* Header */}
+        <header className="flex justify-between items-center p-2 px-4 w-full bg-gray-200">
+            {/* whiteboard icon */}
+            <Link to="/whiteboard" className="text-gray-700">
+                <FaPencilAlt size={20} />
+            </Link>
+
+           
+        </header>
+
+        {/* Main Content */}
+        <div className="flex flex-col flex-grow justify-center items-center">
+            <h2 className="text-xl font-bold text-gray-700">Welcome to the Project</h2>
+            <p className="text-gray-600">Select a file or add collaborators to get started.</p>
+        </div>
+    </div>
+</section>
+
 
             {isModalOpen && (
                 <motion.div
@@ -147,7 +161,7 @@ const Project = () => {
                     exit={{ opacity: 0 }}
                 >
                     <motion.div
-                        className="bg-white p-4 rounded-md w-96 max-w-full relative"
+                        className="bg-gray-700 p-4 rounded-md w-96 max-w-full relative"
                         initial={{ scale: 0.8 }}
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", stiffness: 200 }}
@@ -170,7 +184,7 @@ const Project = () => {
                                     <div className="aspect-square rounded-full w-10 h-10 flex items-center justify-center bg-gray-600">
                                         <RiUserFill className="text-white" />
                                     </div>
-                                    <h1 className="font-semibold text-lg text-black">{user.email}</h1>
+                                    <h1 className="font-semibold text-lg text-white">{user.email}</h1>
                                 </div>
                             ))}
                         </div>
