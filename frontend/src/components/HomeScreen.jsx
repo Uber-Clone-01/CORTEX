@@ -43,7 +43,7 @@ const HomeScreen = () => {
   const handleLogout = () => {
     // Clear user session or any authentication logic you have
     localStorage.removeItem('token'); // Assuming the user is stored in local storage
-    navigate("/login"); // Redirect to login page
+    navigate("/Home"); // Redirect to login page
   };
 
   
